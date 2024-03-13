@@ -3,7 +3,6 @@
 #3. 번호 뽑기
 #4. 번호 확인
 import random
-import p0313.lotto as lotto
 
 
 #화면출력함수
@@ -18,7 +17,7 @@ def screen():
     return choice    
 
 #번호생성함수
-def num_generater(lotto):
+def num_generate(lotto):
     print('[ 번호 생성 ]')
     # lotto = [ i for i in range(1,45+1)] #지역변수로 변환, 새롭게 재정의
     for i in range(45):
