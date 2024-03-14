@@ -1,5 +1,5 @@
 #다른 파일에 있는 함수를 사용할 때
-# 1) impot math -> 사용방법: math,floor() 이름, 함수명()
+# 1) import math -> 사용방법: math,floor() 이름, 함수명()
 # 2) from math import * #이름 생략 가능
 # 3) import lotto
 # from lotto import *
