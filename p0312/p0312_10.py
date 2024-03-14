@@ -5,9 +5,15 @@ import random
 #카드 총 수: 52장 
 
 cardshape=['SPADE', 'DIAMOND', 'HEART', 'CLOVER']
-cardnum=['A',2,3,4,5,6,7,8,9,10,'J','Q','K']
+cardnum=[0]*13
+for i in range(13):
+    cardnum[i]=i+1
+cardnum[0]='A'
+cardnum[11]='J'
+cardnum[12]='Q'
+cardnum[13]='K'
 
-def card_creat(cardlist):
+def card_create(cardlist):
     cnt=0
     for i in range(4):
         for j in range(13):
@@ -44,7 +50,7 @@ while True:
     choice=int(input('원하는 번호를 입력하세요. >> '))
 
     if choice==1:
-        card_creat(cardlist)
+        card_create(cardlist)
         
     elif choice==2:
         card_shuffle(cardlist)

@@ -21,4 +21,4 @@ print(m.floor(12.2))
 # #round():반올림
 # print(round(12.6))
 
-print(dir(m))
+print(dir(m)) #모듈 목록 확인
