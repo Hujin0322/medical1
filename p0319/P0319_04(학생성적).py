@@ -86,7 +86,6 @@ def stu_insert():
         if name=="0":
             print("학생 입력을 취소합니다.")
             break
-        name=input('학생의 이름을 입력하세요. >> ')
         kor=int(input('국어성적을 입력하세요 >> '))
         eng=int(input('영어성적을 입력하세요 >> '))
         math=int(input('수학성적을 입력하세요 >> '))
