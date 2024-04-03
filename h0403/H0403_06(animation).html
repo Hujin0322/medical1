@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션</title>
+    <style>
+        div{width: 100px; height: 100px; 
+            background: blue; border: 3px solid black;
+        /*
+        animation-name:move; --> 애니메이션 이름
+        animation-duration:3s; --> 애니메이션 시간
+        animation-iteration-count: 1;  --> 횟수만큼 진행, infinite(=무한 반복)
+        animation-direction: alternate; --> normal, alternate - 역방향
+        animation-timing-function: ease-in; --> 진행속도
+        animation-fill-mode: forwards; --> 종료 후 스타일 지정 ex) backwards: 처음으로/ forwards: 마지막 모습 유지
+        animation-delay: 1s --> 대기 후 진행
+        */
+        animation: move 3s 3s ease-in infinite alternate, rotate 1s 0s infinite alternate ; /*순서: 이름, 시간, 진행 속도, 지연 시간, 반복, 방향*/
+        
+        }
+        
+        @keyframes rotate{
+            from{transform: rotate(0);}
+            to{transform: rotate(360deg);}
+        }
+
+        @keyframes move{
+            from{background: blue; border: 3px solid black;
+            transform: translate(0,0);
+            }
+
+            to{background: blueviolet; border: 1px solid pink;
+            border-radius: 50%;
+            transform: translate(400px,0);}
+        }
+
+    </style>
+</head>
+<body>
+    <div class=""></div>
+</body>
+</html>

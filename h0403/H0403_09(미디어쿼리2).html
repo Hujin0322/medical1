@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        .main{width: 100%; height: 100%;}
+        .top{width: 100%; height: 200px; background: steelblue;}
+        .middle{width: 100%; height: 600px; display: flex;}
+        .left {width: 60%; height: 600px; background: tan; display: flex;}
+        .left1 {width: 33%; height: 600px;}
+        .left2{width: 33%; height: 600px; background: brown;}
+        .left3{width: 34%; height: 600px; background: yellowgreen;}
+        .right{width: 40%; height: 600px; background: khaki;}
+        footer{width: 100%; height: 300px; background: lavender;}
+
+        @media screen and (max-width:1600px){
+            .left1 {background: blue;}
+        }
+        @media screen and (max-width:1200px){
+            .left1 {background: green;}
+        }
+        @media screen and (max-width:1000px){
+            .left1 {background: pink;}
+            .right{display: none;}
+        }
+        @media screen and (max-width:800px){
+            .left1{background: yellow; width: 50%;}
+            .left2{width: 50%;}
+            .left3{display: none;}
+        }
+        @media screen and (max-width:600px){
+            .left{display: block; height: 400px;}
+            .left1,.left2,.left3{height: 400px;}
+            .left1{background: aqua; width: 100%;}
+            .left2{display: block; width: 100%;}
+            .left3{display: block; width: 100%;}
+            .main{display: block;}
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="top"></div>
+        <div class="middle">
+            <div class="left">
+                <div class="left1"></div>
+                <div class="left2"></div>
+                <div class="left3"></div>
+            </div>
+            <div class="right"></div>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+</html>
