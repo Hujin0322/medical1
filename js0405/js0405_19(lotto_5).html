@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문자열</title>
+  <script>
+    //string => 배열
+    //1-99999 랜덤숫자 생성
+    //ex) 00100인 경우 입력한 숫자와 비교하여 몇 개 맞았는지 출력. 
+    //0245
+    var lo = Math.floor(Math.random()*99999)+1;
+    var lotto = String(lo).padStart(5,"0");
+
+    var num=prompt("5자리 숫자를 입력하세요. >> ")
+    var in_no=String(num).padStart(5,"0");
+
+    var count=0;
+
+    for (var i=0;i<lotto.length;i++){
+      if (in_no[i]==lotto[i]){
+        count++;
+      }
+    }
+    document.write("로또 번호: ", lotto,"<br>")
+    document.write("입력 번호: ", in_no,"<br>")    
+    document.write("일치 갯수: ", count) 
+    
+    /*
+    var num=5;
+    console.log(String(num).padStart(5,"0"));
+    */
+  
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

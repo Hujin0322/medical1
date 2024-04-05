@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>continue</title>
+    <script>
+        //구구단 출력, 3배수와 5의 배수 제외 출력
+        for (var i=2;i<10;i++){
+            for (var s=1;s<10;s++){
+                result=i*s;
+                if (s%3==0 || s%5==0){
+                    continue;
+                }else{
+                    document.write(i,"*",s,"=",result," ")};
+            }
+            document.write("<br>");
+            document.write("<br>");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

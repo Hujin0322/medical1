@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문자열</title>
+  <script>
+    //010-1234-5678
+    //출력: 010-1234-****
+    while(true){
+      var num = prompt("전화번호를 입력하세요. >> ");
+      if (num.length!=13){
+        alert("13자리 전화번호를 입력하세요.")
+        continue;
+      }else{
+        break;
+      }
+    }
+    /*
+    document.write(num.substring(0,3),"-");
+    document.write(num.substring(3,7),"-****");
+
+    /*
+    var num_str = "12345";
+    document.write(num_str.substring(0,3),"<br>");
+    document.write(num_str.charAt(4),"<br>");
+    document.write(num_str.charAt(-1),"<br>");
+    */
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

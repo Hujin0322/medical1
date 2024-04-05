@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch</title>
+    <script>
+        //switch: 비교를 한 번만, break 없으면 }까지 읽고 출력, default없으면 아래 if문 필요X
+        //1. 두 수 입력받음 2. 연산기호 입력 받기 3. switch 사용하여 결과값 출력
+        var num1=Number(prompt("첫번째 수를 입력하세요. >> "));
+        var num2=Number(prompt("첫번째 수를 입력하세요. >> "));
+        var sign=prompt("사칙연산 부호(+,-,*,/)를 입력하세요. >> ");
+        var result;
+        switch(sign){
+            case "+":
+            result=num1+num2;
+            break;
+            case "-":
+            result=num1-num2;
+            break;
+            case "*":
+            result=num1*num2;
+            break;
+            case "/":
+            result=num1/num2;
+            break;
+        default:
+            alert("잘못 입력하셨습니다.");
+        }
+        if (result){
+            document.write(result)
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

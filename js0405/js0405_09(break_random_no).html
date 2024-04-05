@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>break</title>
+    <script>
+        //1-100
+        var random_no=Math.floor(Math.random()*100)+1;
+        //랜덤숫자 맞추기
+        for (var i=1;i<=5;i++){
+            num=Number(prompt("숫자를 입력하세요."))
+            if (num>random_no){
+                alert(num+"보다 작은 수입니다.")
+            }else if (num<random_no){
+                alert(num+"보다 큰 수입니다.")
+            }else{
+                document.write("정답입니다.")
+                document.write("<br>")
+                break;
+            }
+        }document.write("정답: ",random_no)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
