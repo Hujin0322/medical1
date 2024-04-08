@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0;}
+    </style>
+    <script>
+        //Q. 현재 날짜까지 몇 일, 몇 시간, 몇 분, 몇 초가 남았는지 출력
+        //
+        var today = new Date();
+        var d_day = new Date(2024,9,31);
+
+        var diffDate = d_day.getTime() - today.getTime();
+        document.write("<h2>10월 31일까지 남은 일시분초</h2>")
+        document.write("현재 밀리세컨드 차이: ",diffDate,"<br>");
+        
+        // 1000초 * 60초 * 60분 * 24시간
+
+        var date_result = Math.floor(diffDate/(1000*60*60*24));
+        var remain_date = diffDate%(1000*60*60*24);
+        document.write("일자: ",date_result,"<br>")
+        document.write("현재 남은 나머지 일자: ",remain_date,"<br>")
+        
+        var hour_result = Math.floor(remain_date/(1000*60*60));
+        var remain_hour = remain_date%(1000*60*60);
+        document.write("시간: ",hour_result,"<br>")
+        document.write("현재 남은 나머지 시간: ",remain_hour,"<br>")
+
+        var M_result = Math.floor(remain_hour/(1000*60));
+        var remain_M = remain_hour%(1000*60);
+        document.write("분: ",M_result,"<br>")
+        document.write("초: ",remain_M%1000,"<br>")
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
