@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>return</title>
+    <script>
+        let arr_result = [];
+        //파이썬 제외 모든 언어는 return 값 한 개만 가능
+        //return은 1개 값만 가능 (2개 이상은 배열 사용)
+        function result(num1,num2){
+            let n_total = (num1+num2);
+            let n_avg =  (num1+num2)/2;
+            arr_result.push(n_total)
+            arr_result.push(n_avg)
+        }
+
+        num1= Number(prompt("국어 점수 입력. >> "));
+        num2= Number(prompt("영어 점수 입력. >> "));
+
+        result(num1,num2);
+        
+        document.write("결과 값: ",arr_result,"<br>")
+        
+    </script>
+</head>
+<body>
+    <button>평균 구하기</button>
+</body>
+</html>

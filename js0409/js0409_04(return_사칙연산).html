@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <script>
+        var arr_result = []
+        //두 수를 입력받아, 사칙연산 후 리턴 하고 출력
+        var num1 = Number(prompt("수를 입력하세요. >> "));
+        var num2 = Number(prompt("수를 입력하세요. >> "));
+        var arr_result = result(num1,num2);
+        document.write("결과 값: ", arr_result)
+
+        function result(num1,num2){
+            result1 = num1+num2;
+            result2 = num1-num2;
+            result3 = num1*num2;
+            result4 = num1/num2;
+            var arr_result = [result1,result2,result3,result4];
+            return arr_result
+        }
+        
+        //리턴X의 경우
+        function result(num1,num2){
+            arr_result.push(num1+num2);
+            arr_result.push(num1-num2);
+            arr_result.push(num1*num2);
+            arr_result.push(num1/num2);
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

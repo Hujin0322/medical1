@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수선언방법</title>
+    <script>
+        //var - 변수
+        //let - 변수 / const - 상수
+        //var: 중복으로 변수 선언 가능
+        //let, const: 중복으로 변수 선언 불가능, 초기화 필수(초기화X --> 에러), 
+        //            지역변수로 선언된 것은 전역에서 사용X.
+        
+        //함수 내 - 지역변수(해당 함수만 사용O)/  함수 밖 - 전역변수 (어디든 사용O)
+        //선언 --> 메모리 상단에 저장 --> 프로그램 실행 
+        //var: 중복 확인X --> 자동 할당(선언 위치 상관X)
+        //let: 값 할당 필요 --> 중복 확인 위함 (선언 위치 주의)
+        //호이스팅: 모든 선언문 찾아 먼저 실행 (var - undefined로 초기화/ let,const - 초기화X)
+        var a=0;
+        let b=1; 
+        const c=2; 
+        document.write(a,"<br>");
+        document.write(b,"<br>");
+        document.write(c,"<br>");
+        var a = "홍길동";
+        document.write(a,"<br>");
+
+        
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
