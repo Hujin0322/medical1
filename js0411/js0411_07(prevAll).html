@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>선택자</title>
+    <script>
+        $(function(){
+            console.log($("#p02").prevAll()[0]);
+            console.log($("#p02").prevAll()[0].innerHTML);
+            console.log($("#p02").prevAll()[1]);
+            console.log($("#p02").prevAll()[2]);
+        }); //Jquery
+    </script>
+</head>
+<body>
+
+    <div id="wrap">         <!--조상 요소-->
+        <div id="in_wrap">  <!--부모 요소-->
+            <h1>제목1</h1>  <!--자식 요소-->
+            <h2>제목2</h2>  <!--형제 요소-->
+            <p>내용1</p>
+            <p id="p02">내용2</p>
+            <p>내용3</p>
+        </div>
+    </div>
+</body>
+</html>

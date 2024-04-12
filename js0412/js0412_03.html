@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script>
+        $(function(){
+            let no = [1,2,3,4,5,6,7,8,9,10];
+            let name = ['홍길동','유관순','이순신','김구','강감찬','홍길순','홍길자','최현묵','이규원','너누구'];
+            let kor = [59,82,98,63,63,78,58,70,67,71];
+            let eng = [81,67,53,66,84,98,54,83,87,54];
+            let math = [81,53,95,54,54,92,71,59,86,57];
+            let total = [221,202,246,183,201,268,183,210,240,182];
+            let avg = [73,67,82,61,67,89,61,70,80,60];
+        
+        //학생*10
+        let sdata = "";
+        for (let i=0;i<no.length;i++){
+            sdata += "<tr id='"+no[i]+"'>";
+            sdata += "<td><input type='checkbox' name='stu' class='stuChk' value="+i+"></td>";
+            sdata += "<td>"+no[i]+"</td>";
+            sdata += "<td>"+name[i]+"</td>";
+            sdata += "<td>"+kor[i]+"</td>";
+            sdata += "<td>"+eng[i]+"</td>";
+            sdata += "<td>"+math[i]+"</td>";
+            sdata += "<td>"+total[i]+"</td>";
+            sdata += "<td>"+avg[i]+"</td>";
+            sdata += "<td>0</td>";
+            sdata += "<td><button class='delBtn' >삭제</button></td>";
+            sdata += "</tr>"; 
+        }; //for
+
+        //tbody에 추가
+        $("#tbody").html(sdata);
+
+//입력------------------------------------------------------------------------------
+
+        //입력창 display
+        $("#inpBtn").click(function(){
+            $(".p_all").css("display","block");
+        })
+        
+        $("#canBtn").click(function(){
+            $(".p_all").css("display","none");
+        })
+            
+
+        //학생입력확인 버튼
+        $("#confBtn").click(function(){
+            
+        //공백 확인
+        
+
+
+        //학생성적입력
+        let i_no = Math.max.apply(null,no)+1;
+        no.push(i_no);
+        let i_name = $("#name").val();
+        let i_kor = Number($("#kor").val());
+        let i_eng = Number($("#eng").val());
+        let i_math = Number($("#math").val());
+        let i_total = i_kor + i_eng + i_math;
+        let i_avg = (i_total/3).toFixed(2);
+        let i_rank = 0;
+
+        //table tr 추가
+        let sdata = "";
+        sdata += "<tr id='"+i_no+"'>";
+        sdata += "<td><input type='checkbox' name='stu' class='stuChk' value="+i_no+"></td>";
+        sdata += "<td>"+i_no+"</td>";
+        sdata += "<td>"+i_name+"</td>";
+        sdata += "<td>"+i_kor+"</td>";
+        sdata += "<td>"+i_eng+"</td>";
+        sdata += "<td>"+i_math+"</td>";
+        sdata += "<td>"+i_total+"</td>";
+        sdata += "<td>"+i_avg+"</td>";
+        sdata += "<td>0</td>";
+        sdata += "<td><button class='delBtn'>삭제</button></td>";
+        sdata += "</tr>"; 
+
+        //html소스를 tbody에 추가
+        $("#tbody").append(sdata);
+
+        //input 초기화
+        $("#name").val("");
+        $("#kor").val("");
+        $("#eng").val("");
+        $("#math").val("");
+        $(".p_all").css("display","none");
+
+
+    });//학생입력버튼
+
+            
+//체크------------------------------------------------------------------
+        //Allchk
+        $("#allChk").click(function(){
+            if($(this).is(":checked")==true){
+                $(".stuChk").each(function(){
+                    $(this).prop("checked",true);
+                })
+            }else{
+                $(".stuChk").each(function(){
+                    $(this).prop("checked",false);
+                })
+            }     
+        });//전체선택, 취소
+            
+//삭제------------------------------------------------------------------
+            
+        //table의 삭제 버튼 클릭
+        $(".delBtn").click(function(){
+            console.log($(this).parent().parent().attr("id"));
+            
+        if (confirm("삭제하시겠습니까?")){
+            $("#"+$(this).parent().parent().attr("id")).remove();
+        };
+        });//table의 삭제 버튼 클릭
+
+        
+        //하단 버튼: 삭제
+        $("#delBtn").click(function(){
+            //체크X
+            if ($(".stuChk:checked").length<1){
+                alert("삭제할 데이터 없음.");
+                return false;
+            };//체크X
+            
+            //체크 확인
+            if (!confirm("삭제하시겠습니까?")){
+                return false;
+            };// 체크O --> no
+            
+            //모든 체크 박스 가져오기
+            $(".stuChk").each(function(){
+                if ($(this).is(":checked")==true){
+                    console.log("현재 선택된 class 값: "+$(this).val());
+                    console.log("현재 선택된 id 값: "+$(this).parent().parent().attr("id"));
+                    $("#"+$(this).parent().parent().attr("id")).remove();
+                };
+            });//모든 체크 박스 가져오기       
+        });//하단 버튼: 삭제
+    });
+    
+</script>
+</head>
+<body>
+    <section id="main">
+        <h2>학생성적프로그램</h2>
+        <table>
+            <colgroup>
+                <col width="8%">
+                <col width="8%">
+                <col width="*">
+                <col width="8%">
+                <col width="8%">
+                <col width="8%">
+                <col width="12%">
+                <col width="12%">
+                <col width="12%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="allChk" id="allChk" value="allChk"></th>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                    <th>합계</th>
+                    <th>평균</th>
+                    <th>등수</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+        <div id="button">
+            <button id="inpBtn">학생입력</button>
+            <button id="searBtn">학생검색</button>
+            <button id="modBtn">학생수정</button>
+            <button id="delBtn">학생삭제</button>
+        </div>
+    </section>
+
+    <div class="p_all">
+        <div class="p_main">
+            <h2>학생성적입력</h2>
+            <form action="#" name="frm" method="get">
+                <table>
+                    <colgroup>
+                        <col width="150px">
+                        <col width="400px">
+                    </colgroup>
+                    <tr>
+                        <th>이름</th>
+                        <td><input type="text" name="name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <th>국어 점수</th>
+                        <td><input type="text" name="kor" id="kor"></td>
+                    </tr>
+                    <tr>
+                        <th>영어 점수</th>
+                        <td><input type="text" name="eng" id="eng"></td>
+                    </tr>
+                    <tr>
+                        <th>수학 점수</th>
+                        <td><input type="text" name="math" id="math"></td>
+                    </tr>
+                    <tr>
+                        <td id="in_btn" colspan="2">
+                            <button type="button" id="confBtn">확인</button>
+                            <button type="button" id="canBtn">취소</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
