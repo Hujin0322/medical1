@@ -125,7 +125,7 @@ def stu_update():
     for s in students:
         if s.name==search:
             break
-        cnt+=1
+        cnt+=1 #search의 위치값
     if cnt>=len(students):
         print('검색한 학생이 없습니다.')    
     else:
