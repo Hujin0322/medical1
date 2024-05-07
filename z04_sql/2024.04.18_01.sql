@@ -1,13 +1,13 @@
---°¡Áö°í ÀÖ´Â Å×ÀÌºí °Ë»ö
+--ê°€ì§€ê³  ìˆëŠ” í…Œì´ë¸” ê²€ìƒ‰
 select * from tab;
 
---´ÜÃàÅ°´Â f9·Î »ç¿ëÇÏÀÚ
+--ë‹¨ì¶•í‚¤ëŠ” f9ë¡œ ì‚¬ìš©í•˜ì
 select * from employees;
 
---table ±¸Á¶ È®ÀÎ
+--table êµ¬ì¡° í™•ì¸
 desc employees;
 
--- Å×ÀÌºí »ı¼º
+-- í…Œì´ë¸” ìƒì„±
 create table stu_score (
     no number(2),
     kor number(3),
@@ -19,7 +19,7 @@ insert into stu_score ( no, kor, eng, avg) values(
 1,100,99,(100+99)/2
 );
 
---¸ğµç Ä®·³¿¡ °ª Ãß°¡ ½Ã »ı·« °¡´É
+--ëª¨ë“  ì¹¼ëŸ¼ì— ê°’ ì¶”ê°€ ì‹œ ìƒëµ ê°€ëŠ¥
 insert into stu_score values(
 1,95,98,(95+98)/2
 );
@@ -40,11 +40,11 @@ eng number,
 avg number(4,1)
 );
 
---³¯Â¥ ±âº» ÇüÅÂ: 24/01/01
---dual: °¡»ó Å×ÀÌºí (from µÚ¿¡ ¹«Á¶°Ç table(or dual)) 
+--ë‚ ì§œ ê¸°ë³¸ í˜•íƒœ: 24/01/01
+--dual: ê°€ìƒ í…Œì´ë¸” (from ë’¤ì— ë¬´ì¡°ê±´ table(or dual)) 
 select sysdate from dual;
 
---³¯Â¥ Æ÷¸Ë º¯°æ: to_char Çüº¯È¯ -> Æ÷¸Ë ÁöÁ¤
+--ë‚ ì§œ í¬ë§· ë³€ê²½: to_char í˜•ë³€í™˜ -> í¬ë§· ì§€ì •
 select to_char(sysdate, 'yyyy-mm-dd HH:mi:ss') from dual;
 
 select to_char(sysdate, 'hh:mi:ss') from dual;

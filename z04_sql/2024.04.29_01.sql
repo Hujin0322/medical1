@@ -1,34 +1,34 @@
 --drop table member;
 
--- ¹«°á¼º Á¦¾àÁ¶°Ç: ºÎÀûÇÕ ÀÚ·á°¡ ÀÔ·ÂµÇÁö ¾Êµµ·Ï ÇÏ±â À§ÇÑ ±ÔÄ¢
+-- ë¬´ê²°ì„± ì œì•½ì¡°ê±´: ë¶€ì í•© ìë£Œê°€ ì…ë ¥ë˜ì§€ ì•Šë„ë¡ í•˜ê¸° ìœ„í•œ ê·œì¹™
 -- not null, unique, primary key, foreign key, check
--- Å×ÀÌºí »ı¼º
+-- í…Œì´ë¸” ìƒì„±
 create table member(
 memNO number(4) not null,
 id varchar2(30) primary key,
 pw varchar2(30) not null,
 name varchar2(30),
-gender varchar2(6) check(gender in('³²ÀÚ','¿©ÀÚ')),
+gender varchar2(6) check(gender in('ë‚¨ì','ì—¬ì')),
 mdate date default sysdate 
 );
 
--- µ¥ÀÌÅÍ ÀÔ·Â, Ãâ·Â, ¼öÁ¤, »èÁ¦
+-- ë°ì´í„° ì…ë ¥, ì¶œë ¥, ìˆ˜ì •, ì‚­ì œ
 insert into member (memno,id,pw,name,gender,mdate) values(
-member_seq.nextval,'aaa','1111','È«±æµ¿','³²ÀÚ',sysdate
+member_seq.nextval,'aaa','1111','í™ê¸¸ë™','ë‚¨ì',sysdate
 );
 
 insert into member (memno, id, pw, name, gender) values(
-member_seq.nextval, 'bbb', '1111', 'À¯°ü¼ø', '¿©ÀÚ'
+member_seq.nextval, 'bbb', '1111', 'ìœ ê´€ìˆœ', 'ì—¬ì'
 );
 
 insert into member values (
-member_seq.nextval, 'ccc', '1111', 'ÀÌ¼ø½Å', '³²ÀÚ', sysdate
+member_seq.nextval, 'ccc', '1111', 'ì´ìˆœì‹ ', 'ë‚¨ì', sysdate
 );
 
---Å×ÀÌºí »ı¼º: °Ô½ÃÆÇ Å×ÀÌºí ±¸Á¶
+--í…Œì´ë¸” ìƒì„±: ê²Œì‹œíŒ í…Œì´ë¸” êµ¬ì¡°
 create table board (
 bno number (4) primary key,
-id varchar2 (30), -- ¿Ü·¡Å°·Î µî·Ï
+id varchar2 (30), -- ì™¸ë˜í‚¤ë¡œ ë“±ë¡
 btitle varchar2(1000),
 bcontent varchar2(4000),
 bdate date default sysdate,
@@ -37,26 +37,26 @@ bstep number default 0,
 bindent number default 0,
 bhit number default 1,
 bfile varchar2(100) default '',
-constraint fk_board_id foreign key(id) -- ¿Ü·¡Å°(foreign key)ÀÇ º°Äª: fk_id
-references member(id) -- member Å×ÀÌºíÀÇ primary key: id 
+constraint fk_board_id foreign key(id) -- ì™¸ë˜í‚¤(foreign key)ì˜ ë³„ì¹­: fk_id
+references member(id) -- member í…Œì´ë¸”ì˜ primary key: id 
 );
 
 select * from member;
 
--- primary key »èÁ¦ --> foreign key¿¡ µî·ÏµÈ µ¥ÀÌÅÍ ¿ì¼± ¸ğµÎ »èÁ¦.
--- primary key »èÁ¦ ½Ã ¸ğµÎ »èÁ¦ ¹æ¹ı, ¸ğµÎ º¸Á¸ ¹æ¹ı
--- ¸ğµÎ »èÁ¦ ¹æ¹ı: on delete cascade/ ¸ğµÎ º¸Á¸ ¹æ¹ı: on update cascade
+-- primary key ì‚­ì œ --> foreign keyì— ë“±ë¡ëœ ë°ì´í„° ìš°ì„  ëª¨ë‘ ì‚­ì œ.
+-- primary key ì‚­ì œ ì‹œ ëª¨ë‘ ì‚­ì œ ë°©ë²•, ëª¨ë‘ ë³´ì¡´ ë°©ë²•
+-- ëª¨ë‘ ì‚­ì œ ë°©ë²•: on delete cascade/ ëª¨ë‘ ë³´ì¡´ ë°©ë²•: on update cascade
 
 insert into board (bno, id, btitle, bcontent, bdate, bgroup,bstep, bindent, bhit, bfile) values (
-board_seq.nextval, 'aaa', 'Á¦¸ñÀÔ´Ï´Ù.', '³»¿ëÀÔ´Ï´Ù.', sysdate, board_seq.currval, 0,0,1,null
+board_seq.nextval, 'aaa', 'ì œëª©ì…ë‹ˆë‹¤.', 'ë‚´ìš©ì…ë‹ˆë‹¤.', sysdate, board_seq.currval, 0,0,1,null
 );
 
 insert into board values(
-board_seq.nextval, 'bbb', 'Á¦¸ñÀÔ´Ï´Ù2.', '³»¿ëÀÔ´Ï´Ù2.', sysdate, board_seq.currval, 0,0,1,''
+board_seq.nextval, 'bbb', 'ì œëª©ì…ë‹ˆë‹¤2.', 'ë‚´ìš©ì…ë‹ˆë‹¤2.', sysdate, board_seq.currval, 0,0,1,''
 );
 
 insert into board (bno, id, btitle, bcontent, bgroup) values (
-board_seq.nextval, 'aaa', 'Á¦¸ñÀÔ´Ï´Ù3.', '³»¿ëÀÔ´Ï´Ù3.', board_seq.currval
+board_seq.nextval, 'aaa', 'ì œëª©ì…ë‹ˆë‹¤3.', 'ë‚´ìš©ì…ë‹ˆë‹¤3.', board_seq.currval
 );
 
 select * from board;
@@ -65,22 +65,22 @@ delete board where bno=3;
 
 commit;
 
-delete member where id='aaa'; -- foreign keyÀÌ¹Ç·Î board¿¡¼­ ¸ÕÀú »èÁ¦ ÇÊ¿ä.
+delete member where id='aaa'; -- foreign keyì´ë¯€ë¡œ boardì—ì„œ ë¨¼ì € ì‚­ì œ í•„ìš”.
 
 -------------------------------------------------------------------------------
 
--- decode Á¶°Ç¹® 
+-- decode ì¡°ê±´ë¬¸ 
 select emp_name, department_id, 
 decode (department_id, 
-10,'ÃÑ¹«±âÈ¹ºÎ',
-20, '¸¶ÄÉÆÃ',
-30, '±¸¸Å/»ı»êºÎ',
-40, 'ÀÎ»çºÎ')
+10,'ì´ë¬´ê¸°íšë¶€',
+20, 'ë§ˆì¼€íŒ…',
+30, 'êµ¬ë§¤/ìƒì‚°ë¶€',
+40, 'ì¸ì‚¬ë¶€')
 from employees
 order by department_id;
 
 select * from stu_score order by avg desc;
--- 90Á¡ - a, 80Á¡- b, 70Á¡ - c
+-- 90ì  - a, 80ì - b, 70ì  - c
 select name, avg, 
 decode (avg,
 90, 'A',
@@ -93,7 +93,7 @@ select department_id, department_name from departments;
 
 select job_id,salary from employees;
 
---sh_clerk: salary 15%ÀÎ»ó, ad_asst: 10% ÀÎ»ó, mk_rep: 5% ÀÎ»ó
+--sh_clerk: salary 15%ì¸ìƒ, ad_asst: 10% ì¸ìƒ, mk_rep: 5% ì¸ìƒ
 select job_id, salary, 
 decode (job_id,
 'SH_CLERK', salary+(salary*0.15),
@@ -101,8 +101,8 @@ decode (job_id,
 'MK_REP', salary+(salary*0.05)) 
 as salary_up from employees;
 
--- job_id Áß clerkÀÌ µé¾î°¡´Â job_id °Ë»ö
--- like _ ÀÚ¸´¼ö, % ¸ğµç °Í
+-- job_id ì¤‘ clerkì´ ë“¤ì–´ê°€ëŠ” job_id ê²€ìƒ‰
+-- like _ ìë¦¿ìˆ˜, % ëª¨ë“  ê²ƒ
 select job_id from employees
 where job_id like '%CLERK%';
 
@@ -124,38 +124,38 @@ order by department_id;
 
 select department_id,
 case 
-when department_id = 10 then 'ÃÑ¹«±âÈ¹ºÎ'
-when department_id = 20 then '¸¶ÄÉÆÃ'
-when department_id = 30 then '±¸¸Å/»ı»êºÎ'
-when department_id = 40 then 'ÀÎ»çºÎ'
-when department_id = 50 then '¹è¼ÛºÎ'
+when department_id = 10 then 'ì´ë¬´ê¸°íšë¶€'
+when department_id = 20 then 'ë§ˆì¼€íŒ…'
+when department_id = 30 then 'êµ¬ë§¤/ìƒì‚°ë¶€'
+when department_id = 40 then 'ì¸ì‚¬ë¶€'
+when department_id = 50 then 'ë°°ì†¡ë¶€'
 when department_id = 60 then 'IT'
-when department_id = 70 then 'È«º¸ºÎ'
-when department_id = 80 then '¿µ¾÷ºÎ'
-when department_id = 90 then '±âÈ¹ºÎ'
-when department_id = 100 then 'ÀÚ±İºÎ'
-when department_id = 110 then '°æ¸®ºÎ'
-when department_id = 120 then 'Àç¹«ÆÀ'
-when department_id = 130 then '¼¼¹«ÆÀ'
-when department_id = 140 then '½Å¿ë°ü¸®ÆÀ'
-when department_id = 150 then 'ÁÖ½Ä°ü¸®ÆÀ'
-when department_id = 160 then '¼öÀÍ°ü¸®ÆÀ'
-when department_id = 170 then '»ı»êÆÀ'
-when department_id = 180 then '°Ç¼³ÆÀ'
-when department_id = 190 then '°è¾àÆÀ'
-when department_id = 200 then '¿î¿µÆÀ'
-when department_id = 210 then 'IT Áö¿ø'
+when department_id = 70 then 'í™ë³´ë¶€'
+when department_id = 80 then 'ì˜ì—…ë¶€'
+when department_id = 90 then 'ê¸°íšë¶€'
+when department_id = 100 then 'ìê¸ˆë¶€'
+when department_id = 110 then 'ê²½ë¦¬ë¶€'
+when department_id = 120 then 'ì¬ë¬´íŒ€'
+when department_id = 130 then 'ì„¸ë¬´íŒ€'
+when department_id = 140 then 'ì‹ ìš©ê´€ë¦¬íŒ€'
+when department_id = 150 then 'ì£¼ì‹ê´€ë¦¬íŒ€'
+when department_id = 160 then 'ìˆ˜ìµê´€ë¦¬íŒ€'
+when department_id = 170 then 'ìƒì‚°íŒ€'
+when department_id = 180 then 'ê±´ì„¤íŒ€'
+when department_id = 190 then 'ê³„ì•½íŒ€'
+when department_id = 200 then 'ìš´ì˜íŒ€'
+when department_id = 210 then 'IT ì§€ì›'
 when department_id = 220 then 'NOC'
-when department_id = 230 then 'IT ÇïÇÁµ¥½ºÅ©'
-when department_id = 240 then '°ø°ø ÆÇ¸Å»ç¾÷ÆÀ'
-when department_id = 250 then 'ÆÇ¸ÅÆÀ'
-when department_id = 260 then 'Ã¤¿ëÆÀ'
-when department_id = 270 then '±Ş¿©ÆÀ'
+when department_id = 230 then 'IT í—¬í”„ë°ìŠ¤í¬'
+when department_id = 240 then 'ê³µê³µ íŒë§¤ì‚¬ì—…íŒ€'
+when department_id = 250 then 'íŒë§¤íŒ€'
+when department_id = 260 then 'ì±„ìš©íŒ€'
+when department_id = 270 then 'ê¸‰ì—¬íŒ€'
 end as department_name
 from departments;
 
--- ¿ù±Ş Ãâ·Â (job_id)
--- clerk Æ÷ÇÔ: 15% ÀÎ»ó,  ad_asst: 10% ÀÎ»ó, mk_rep: 5% ÀÎ»ó, man: 2% ÀÎ»ó
+-- ì›”ê¸‰ ì¶œë ¥ (job_id)
+-- clerk í¬í•¨: 15% ì¸ìƒ,  ad_asst: 10% ì¸ìƒ, mk_rep: 5% ì¸ìƒ, man: 2% ì¸ìƒ
 select job_id, salary,
 case 
 when job_id like '%CLERK%' then salary+(salary*0.15)
@@ -167,10 +167,10 @@ end as new_salary
 from employees
 order by new_salary desc;
 
---  ¿ù±Ş Æò±Õ ÀÌÇÏ --> 15% ÀÎ»ó, Æò±Õ ÀÌ»ó --> 5% ÀÎ»ó
+--  ì›”ê¸‰ í‰ê·  ì´í•˜ --> 15% ì¸ìƒ, í‰ê·  ì´ìƒ --> 5% ì¸ìƒ
 select avg(salary) from employees;
 
--- employeesÅ×ÀÌºí¿¡¼­ °Ë»ö - salary_updownÀÌ ¾øÀ½.
+-- employeesí…Œì´ë¸”ì—ì„œ ê²€ìƒ‰ - salary_updownì´ ì—†ìŒ.
 select emp_name,salary,
 case
 when salary >= (select avg(salary) from employees) then salary+(salary*0.15)
@@ -181,7 +181,7 @@ employees
 )
 order by salary_up asc;
 
--- salary_updownÄÃ·³ÀÌ ÀÖÀ½.
+-- salary_updownì»¬ëŸ¼ì´ ìˆìŒ.
 select emp_name,salary,salary_updown,
 case
 when salary >= (select avg(salary) from employees) then salary+(salary*0.15)
@@ -213,7 +213,7 @@ end as salary_down
 from employees
 order by salary desc;
 
---case 2°³ »ç¿ë
+--case 2ê°œ ì‚¬ìš©
 select emp_name, salary,
 case
 when salary >= (select avg(salary) from employees) then 'up'
@@ -234,7 +234,7 @@ select * from stu_score;
 select total, rank from stu_score
 order by total desc;
 
--- rank () ÇÔ¼ö
+-- rank () í•¨ìˆ˜
 select total, rank from stu_score
 order by total desc;
 
@@ -249,7 +249,7 @@ update stu_score set rank = 1
 where total=291;
 
 
--- 1000¸íÀÇ ¼øÀ§¸¦ °¢°¢ ÀÔ·Â
+-- 1000ëª…ì˜ ìˆœìœ„ë¥¼ ê°ê° ì…ë ¥
 update stu_score a
 set rank = (
 select ranks from(
@@ -261,7 +261,7 @@ where a.no =b.no
 select * from stu_score
 order by rank asc;
 
---ÄÃ·³ 2°³ no, ranks
+--ì»¬ëŸ¼ 2ê°œ no, ranks
 select no, rank() over (order by total desc) as ranks from stu_score;
 
 commit;
@@ -272,16 +272,16 @@ select department_id, department_name from departments;
 select emp_name,employees.department_id, department_name from employess, departments
 where employees.department_id = departments.department_id;
 
--- µÎ Å×ÀÌºí Á¶ÀÎÇØ¼­ Ãâ·Â
+-- ë‘ í…Œì´ë¸” ì¡°ì¸í•´ì„œ ì¶œë ¥
 select a.department_id, department_name from employees a,departments b
 where a.department_id = b.department_id;
 
--- ±×·ìÇÔ¼ö sum, avg, count, max, min, stddev Ç¥ÁØÆíÂ÷, variance ºĞ»ê
+-- ê·¸ë£¹í•¨ìˆ˜ sum, avg, count, max, min, stddev í‘œì¤€í¸ì°¨, variance ë¶„ì‚°
 
--- ¿ù±ŞÀÇ ÃÑÇÕ
+-- ì›”ê¸‰ì˜ ì´í•©
 select sum(salary) from employees;
 
--- ±¹¾î Á¡¼ö Á¾ÇÕ stu_score
+-- êµ­ì–´ ì ìˆ˜ ì¢…í•© stu_score
 select sum(kor) from stu_score;
 
 select count(*) from employees;
@@ -289,34 +289,34 @@ select count(*) from employees;
 select count(*) from employees
 where department_id = 50;
 
--- Ä¿¹Ì¼ÇÀ» ¹Ş´Â »ç¿øÀÇ ¼ö¸¦ ±¸ÇÏ½Ã¿À.
+-- ì»¤ë¯¸ì…˜ì„ ë°›ëŠ” ì‚¬ì›ì˜ ìˆ˜ë¥¼ êµ¬í•˜ì‹œì˜¤.
 select count(commission_pct) from employees;
 
 select count(*) from employees
 where commission_pct is not null;
 
--- Ä¿¹Ì¼ÇÀÌ ÀÖ´Â »ç¿ø °Ë»ö
+-- ì»¤ë¯¸ì…˜ì´ ìˆëŠ” ì‚¬ì› ê²€ìƒ‰
 select emp_name, commission_pct from employees
 where commission_pct is not null;
 
 select e.employee_id from employees e;
 select employees.employee_id from employees, departments;
--- group by µÚ¿£ º°Äª »ç¿ëX
+-- group by ë’¤ì—” ë³„ì¹­ ì‚¬ìš©X
 
--- ÀüÃ¼ »ç¿ø ¼ö
+-- ì „ì²´ ì‚¬ì› ìˆ˜
 select count(*) from employees;
 
 --department = 50
 select count(*) from employees
 where department_id = 40;
 
--- ºÎ¼­º°·Î ±×·ìÁö¾î »ç¿ø¼ö Ãâ·Â
+-- ë¶€ì„œë³„ë¡œ ê·¸ë£¹ì§€ì–´ ì‚¬ì›ìˆ˜ ì¶œë ¥
 select department_id,count(department_id) from employees
 group by department_id
 order by department_id;
 
--- avg ±âÁØ grade
--- stu_score 90Á¡ ÀÌ»ó A, 80Á¡ ÀÌ»ó B, 70Á¡ ÀÌ»ó C, 60Á¡ ÀÌ»ó D, 60Á¡ ¹Ì¸¸ F
+-- avg ê¸°ì¤€ grade
+-- stu_score 90ì  ì´ìƒ A, 80ì  ì´ìƒ B, 70ì  ì´ìƒ C, 60ì  ì´ìƒ D, 60ì  ë¯¸ë§Œ F
 select name, avg,
 case 
 when avg >= 90 then 'A'
@@ -327,9 +327,9 @@ else 'F'
 end as grade
 from stu_score; 
 
--- A ÇĞÁ¡ ¸î ¸í (group by´Â º°Äª »ç¿ëX --> grade »ç¿ëX)
+-- A í•™ì  ëª‡ ëª… (group byëŠ” ë³„ì¹­ ì‚¬ìš©X --> grade ì‚¬ìš©X)
 select grade, count(grade) from
-( --ÇÏ³ªÀÇ Å×ÀÌºí·Î »ı°¢
+( --í•˜ë‚˜ì˜ í…Œì´ë¸”ë¡œ ìƒê°
 select avg,
 case 
 when avg >= 90 then 'A'
@@ -343,8 +343,8 @@ from stu_score
 group by grade
 order by grade asc;
 
--- total Á¡¼ö¸¦ 91-99 --> 90, 81-89 --> 80
--- trunc(kor,-1)¸¦ group by »ç¿ë
+-- total ì ìˆ˜ë¥¼ 91-99 --> 90, 81-89 --> 80
+-- trunc(kor,-1)ë¥¼ group by ì‚¬ìš©
 select trunc(kor,-1)kor ,count(*) from stu_score
 where trunc(kor,-1) =90
 group by trunc(kor,-1); 
@@ -353,7 +353,7 @@ select k_kor, count(k_kor)k_count from
 (select trunc(kor,-1) as k_kor from stu_score)
 group by k_kor;
 
---±×·ìÇÔ¼ö group by »ç¿ë (*º°Äª »ç¿ëX)
+--ê·¸ë£¹í•¨ìˆ˜ group by ì‚¬ìš© (*ë³„ì¹­ ì‚¬ìš©X)
 select department_id, count(*) from employees
 group by department_id
 order by department_id;
@@ -361,15 +361,15 @@ order by department_id;
 select emp_name, count(emp_name) from employees
 group by emp_name;
 
--- ºÎ¼­º° Æò±Õ ¿ù±Ş ±¸ÇÏ½Ã¿À.
+-- ë¶€ì„œë³„ í‰ê·  ì›”ê¸‰ êµ¬í•˜ì‹œì˜¤.
 select department_id, round(avg(salary),2)
 from employees
 group by department_id
 order by department_id;
 
--- clerk, mep, manº° ¿ù±Ş Æò±ÕÀ» ±¸ÇÏ½Ã¿À.
+-- clerk, mep, manë³„ ì›”ê¸‰ í‰ê· ì„ êµ¬í•˜ì‹œì˜¤.
 
---¹®ÀÚ¿­ ÀÚ¸£±â: substr(job_id, 4)
+--ë¬¸ìì—´ ìë¥´ê¸°: substr(job_id, 4)
 select substr(job_id,4), count(substr(job_id,4)) from employees
 where substr(job_id,4) = 'CLERK'
 group by substr(job_id, 4);
@@ -378,7 +378,7 @@ select substr(job_id,4), count(substr(job_id,4)) from employees
 where substr(job_id,4) = 'CLERK'
 group by substr(job_id, 4);
 
--- ºÎ¼­º° ÃÖ´ë ¿ù±Ş, ÃÖ¼Ò ¿ù±Ş, Æò±Õ ¿ù±Ş Ãâ·Â
+-- ë¶€ì„œë³„ ìµœëŒ€ ì›”ê¸‰, ìµœì†Œ ì›”ê¸‰, í‰ê·  ì›”ê¸‰ ì¶œë ¥
 select department_id, count(salary), sum(salary),max(salary), min(salary), round(avg(salary),2) 
 from employees
 group by department_id
@@ -391,20 +391,20 @@ group by a.department_id,department_name
 order by a.department_id
 ;
 
--- ºÎ¼­º° »ç¿ø¼ö, Ä¿¹Ì¼ÇÀ» ¹Ş´Â »ç¿ø ¼ö Ãâ·Â
+-- ë¶€ì„œë³„ ì‚¬ì›ìˆ˜, ì»¤ë¯¸ì…˜ì„ ë°›ëŠ” ì‚¬ì› ìˆ˜ ì¶œë ¥
 
--- 1. ºÎ¼­º° »ç¿ø ¼ö Ãâ·Â
+-- 1. ë¶€ì„œë³„ ì‚¬ì› ìˆ˜ ì¶œë ¥
 select department_id, count(*) from employees
 group by department_id;
 
--- 2. ºÎ¼­º° Ä¿¹Ì¼Ç ¹Ş´Â »ç¿ø ¼ö Ãâ·Â
+-- 2. ë¶€ì„œë³„ ì»¤ë¯¸ì…˜ ë°›ëŠ” ì‚¬ì› ìˆ˜ ì¶œë ¥
 select department_id,count(department_id), count(commission_pct) from employees
 group by department_id;
 
 ------------------------------------------------------------------------------
 
--- having Àı: broup by¿¡ ´ëÇÑ Á¶°ÇÀı
--- where: ÀÏ¹İ ÄÃ·³ÀÇ Á¶°ÇÀı
+-- having ì ˆ: broup byì— ëŒ€í•œ ì¡°ê±´ì ˆ
+-- where: ì¼ë°˜ ì»¬ëŸ¼ì˜ ì¡°ê±´ì ˆ
 select department_id, round(avg(salary),2) from employees
 group by department_id
 order by avg(salary);
@@ -414,21 +414,21 @@ group by department_id
 having avg(salary) >= 6000
 order by avg(salary);
 
--- emp_name µÎ¹øÂ° ±ÛÀÚ°¡ a·Î ½ÃÀÛÇÏ´Â °Í Á¦¿Ü
+-- emp_name ë‘ë²ˆì§¸ ê¸€ìê°€ aë¡œ ì‹œì‘í•˜ëŠ” ê²ƒ ì œì™¸
 select department_id, round(avg(salary),2) from employees
 where emp_name not like '_a%'
 group by department_id
 having avg(salary) >= 6000
 order by avg(salary);
 
--- Æò±Õ ¿ù±Şº¸´Ù ÀÛÀº ±×·ì¸¸ Ãâ·Â
+-- í‰ê·  ì›”ê¸‰ë³´ë‹¤ ì‘ì€ ê·¸ë£¹ë§Œ ì¶œë ¥
 select department_id, round(avg(salary),2) from employees
 where emp_name not like '_a%'
 group by department_id
 having avg(salary) >= (select avg(salary) from employees)
 order by avg(salary);
 
--- ºÎ¼­º° ÃÖ´ë ¿ù±ŞÀÌ 8000ÀÌ»óÀÎ ºÎ¼­, ÃÖ´ë¿ù±ŞÀ» Ãâ·ÂÇÏ½Ã¿À.
+-- ë¶€ì„œë³„ ìµœëŒ€ ì›”ê¸‰ì´ 8000ì´ìƒì¸ ë¶€ì„œ, ìµœëŒ€ì›”ê¸‰ì„ ì¶œë ¥í•˜ì‹œì˜¤.
 select department_id, max(salary) from employees
 where department_id is not null
 group by department_id
@@ -442,19 +442,19 @@ select emp_name, department_id, department_name, salary from employees;
 
 select department_id, department_name from departments;
 
-select count(*) from employees; --107°³
-select count(*) from departments; -- 27°³
+select count(*) from employees; --107ê°œ
+select count(*) from departments; -- 27ê°œ
 
--- +Á¶ÀÎ: Å×ÀÌºí 2°³ ÀÇ¹Ì¾øÀÌ ¿¬°á¸¸ ½ÇÇà.
+-- +ì¡°ì¸: í…Œì´ë¸” 2ê°œ ì˜ë¯¸ì—†ì´ ì—°ê²°ë§Œ ì‹¤í–‰.
 -- 107*27 = 2889
 select *from employees, departments;
 
--- inner join: equi join- µ¿ÀÏ Ä®·³ ±âÁØ Á¶ÀÎ, non-equi join - µ¿ÀÏ Ä®·³X, ´Ù¸¥ Á¶°Ç »ç¿ë Á¶ÀÎ.
+-- inner join: equi join- ë™ì¼ ì¹¼ëŸ¼ ê¸°ì¤€ ì¡°ì¸, non-equi join - ë™ì¼ ì¹¼ëŸ¼X, ë‹¤ë¥¸ ì¡°ê±´ ì‚¬ìš© ì¡°ì¸.
 -- outer join
 -- self join
 
--- equi join: µÎ Å×ÀÌºí °£ °°Àº ÄÃ·³ ºñ±³, ÇØ´ç µ¥ÀÌÅÍ Ãâ·Â
--- 106°³, null °ªÀº °Ë»öµÇÁö ¾ÊÀ½.
+-- equi join: ë‘ í…Œì´ë¸” ê°„ ê°™ì€ ì»¬ëŸ¼ ë¹„êµ, í•´ë‹¹ ë°ì´í„° ì¶œë ¥
+-- 106ê°œ, null ê°’ì€ ê²€ìƒ‰ë˜ì§€ ì•ŠìŒ.
 select employee_id, emp_name, employees.department_id, department_name, salary 
 from employees, departments
 where employees.department_id = departments.department_id;
@@ -464,7 +464,7 @@ select department_id, department_name from departments;
 select id, name from member;
 select id, btitle, bcontent from board;
 
-update member set name = 'È«±æÀÚ'
+update member set name = 'í™ê¸¸ì'
 where id='aaa';
 
 select * from member;

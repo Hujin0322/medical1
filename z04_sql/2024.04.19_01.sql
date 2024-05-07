@@ -1,10 +1,10 @@
 select * from employees;
---list dict [{}] --> jsonÇüÅÂ·Î µé¾î¿È
---¿À¶óÅ¬°ú ÆÄÀÌ½ã ¿¬°á
---¸ğµÎ ´Ù ¿À¶óÅ¬db¿Í ¿¬°á °¡´É
---ÇÏ³ªÀÇ Åë·Î, °ü¸®, Áßº¹ Á¦°Å, ¾ÈÁ¤¼º, º¸¾È¼º º¸Àå --> DB¿¡ ÀúÀåÇÏ´Â ÀÌÀ¯
+--list dict [{}] --> jsoní˜•íƒœë¡œ ë“¤ì–´ì˜´
+--ì˜¤ë¼í´ê³¼ íŒŒì´ì¬ ì—°ê²°
+--ëª¨ë‘ ë‹¤ ì˜¤ë¼í´dbì™€ ì—°ê²° ê°€ëŠ¥
+--í•˜ë‚˜ì˜ í†µë¡œ, ê´€ë¦¬, ì¤‘ë³µ ì œê±°, ì•ˆì •ì„±, ë³´ì•ˆì„± ë³´ì¥ --> DBì— ì €ì¥í•˜ëŠ” ì´ìœ 
 
---È¸¿øÁ¤º¸ Å×ÀÌºí »ı¼º
+--íšŒì›ì •ë³´ í…Œì´ë¸” ìƒì„±
 create table member(
 id varchar2(20),
 pw varchar2(20),
@@ -12,75 +12,75 @@ name varchar2(20),
 phone varchar2(20)
 );
 
---select, delete, insert, create  --> rollback °¡´É, ³ª¸ÓÁö´Â ºÒ°¡
+--select, delete, insert, create  --> rollback ê°€ëŠ¥, ë‚˜ë¨¸ì§€ëŠ” ë¶ˆê°€
 
---µ¥ÀÌÅÍ ÀÔ·Â
+--ë°ì´í„° ì…ë ¥
 insert into member (id,pw,name,phone) values (
-'aaa','1111','È«±æµ¿','010-1111-1111'
+'aaa','1111','í™ê¸¸ë™','010-1111-1111'
 );
 
 insert into member values (
-'bbb','1111','À¯°ü¼ø','010-2222-2222'
+'bbb','1111','ìœ ê´€ìˆœ','010-2222-2222'
 );
 
 insert into member(id,name,phone) values (
-'ccc','ÀÌ¼ø½Å','010-3333-3333'
+'ccc','ì´ìˆœì‹ ','010-3333-3333'
 );
 
---Ä®·³ »ı·« ½Ã Ä®·³ ¼ö¿Í ¸ÂÃç¼­ ÀÔ·ÂÇØ¾ß ÇÔ.
-/*ÄÃ·³ ¼ö ºÎÁ· ¿¡·¯
+--ì¹¼ëŸ¼ ìƒëµ ì‹œ ì¹¼ëŸ¼ ìˆ˜ì™€ ë§ì¶°ì„œ ì…ë ¥í•´ì•¼ í•¨.
+/*ì»¬ëŸ¼ ìˆ˜ ë¶€ì¡± ì—ëŸ¬
 insert into member values (
-'ddd','°­°¨Âù','010-4444-4444'
+'ddd','ê°•ê°ì°¬','010-4444-4444'
 );
 */
 
 select id,pw,name,phone from member;
---¿À¶óÅ¬¿¡¼­ null°ª = ¹«ÇÑ´ë °ª
+--ì˜¤ë¼í´ì—ì„œ nullê°’ = ë¬´í•œëŒ€ ê°’
 
---commit Àü±îÁø rollback ÇÒ °æ¿ì ÀÓ½ÃÀúÀå¼Ò¿¡ ÀÖ´Â µ¥ÀÌÅÍ »èÁ¦µÊ.
+--commit ì „ê¹Œì§„ rollback í•  ê²½ìš° ì„ì‹œì €ì¥ì†Œì— ìˆëŠ” ë°ì´í„° ì‚­ì œë¨.
 commit;
 
---ÀÓ½ÃÀúÀå¼Ò¿¡ µé¾î°¡ ÀÖ´Â µ¥ÀÌÅÍ¸¸ rollback °¡´É.
+--ì„ì‹œì €ì¥ì†Œì— ë“¤ì–´ê°€ ìˆëŠ” ë°ì´í„°ë§Œ rollback ê°€ëŠ¥.
 rollback;
 
 select *from member;
 
 insert into member values (
-'ddd','1111','°­°¨Âù','010-4444-4444'
+'ddd','1111','ê°•ê°ì°¬','010-4444-4444'
 );
 
 select *from member;
 
---¼öÁ¤
+--ìˆ˜ì •
 update member set pw='2222' where id='ccc';
 
 rollback;
 
---¸ğµç Å×ÀÌºí È®ÀÎ
+--ëª¨ë“  í…Œì´ë¸” í™•ì¸
 select *from stu_score;
 
---Å×ÀÌºí Å¸ÀÔ È®ÀÎ
+--í…Œì´ë¸” íƒ€ì… í™•ì¸
 desc member;
 
--- ¿À¶óÅ¬ Å¸ÀÔ
--- number-¼ıÀÚ, date-³¯Â¥, char-°íÁ¤¹®ÀÚ, varchar2-°¡º¯¹®ÀÚ, clob-´ë¿ë·®¹®ÀÚ
+-- ì˜¤ë¼í´ íƒ€ì…
+-- number-ìˆ«ì, date-ë‚ ì§œ, char-ê³ ì •ë¬¸ì, varchar2-ê°€ë³€ë¬¸ì, clob-ëŒ€ìš©ëŸ‰ë¬¸ì
 
---number: Á¤¼ö, ½Ç¼ö
+--number: ì •ìˆ˜, ì‹¤ìˆ˜
 --number(4): -9999~9999
 
 create table mem (
-no number, --µ¥ÀÌÅÍ ±æÀÌ ¹ÌÁöÁ¤
+no number, --ë°ì´í„° ê¸¸ì´ ë¯¸ì§€ì •
 no2 number(4),
-no3 number(4,2) --¼Ò¼öÁ¡ Ç¥½Ã/¾øÀ¸¸é Á¤¼ö·Î ÀÎ½Ä
+no3 number(4,2) --ì†Œìˆ˜ì  í‘œì‹œ/ì—†ìœ¼ë©´ ì •ìˆ˜ë¡œ ì¸ì‹
 );
 
 insert into mem (no) values ( 1234567890 );
 insert into mem (no2) values (9999);
-insert into mem (no2) values (1.11); --1¸¸ ÀÎ½Ä, ¼Ò¼öÁ¡Àº Áö¿öÁü
+insert into mem (no2) values (1.11); --1ë§Œ ì¸ì‹, ì†Œìˆ˜ì ì€ ì§€ì›Œì§
 insert into mem (no2) values (-9999);
 
 insert into mem (no3) values (11.11);
-insert into mem (no3) values (111); --¿À·ù: 111.00À¸·Î ÀÎ½Ä
+insert into mem (no3) values (111); --ì˜¤ë¥˜: 111.00ìœ¼ë¡œ ì¸ì‹
 
 select * from mem;
 commit;
@@ -88,11 +88,11 @@ commit;
 create table mem2(
 no number(4,2),
 mdate date,
-mdate2 timestamp --date: ³â,¿ù,ÀÏ,½Ã,ºĞ,ÃÊ±îÁö ÀúÀå °¡´É = timestamp ¹Ğ¸®ÃÊ±îÁö ÀúÀå °¡´ÉÇÔ.
+mdate2 timestamp --date: ë…„,ì›”,ì¼,ì‹œ,ë¶„,ì´ˆê¹Œì§€ ì €ì¥ ê°€ëŠ¥ = timestamp ë°€ë¦¬ì´ˆê¹Œì§€ ì €ì¥ ê°€ëŠ¥í•¨.
 );
 
 insert into mem2(mdate) values ('2024-04-19');
-insert into mem2(mdate) values (sysdate); --sysdate: ÇöÀç ½Ã°£
+insert into mem2(mdate) values (sysdate); --sysdate: í˜„ì¬ ì‹œê°„
 insert into mem2(mdate2) values (sysdate);
 insert into mem2 (mdate,mdate2) values (sysdate, sysdate+30);
 
@@ -100,7 +100,7 @@ select * from mem2;
 select to_char(mdate,'yyyy/mm/dd hh:mi:ss') from mem2;
 select to_char(mdate2,'yyyy/mm/dd hh:mi:ss:ff') from mem2;
 
---create, insert¸¸ ÀÓ½Ã ÀúÀå, select´Â º¸¿©ÁÖ±â¸¸ °¡´É, commit±îÁö ÇØ¾ß ¿ÏÀü ÀúÀå
+--create, insertë§Œ ì„ì‹œ ì €ì¥, selectëŠ” ë³´ì—¬ì£¼ê¸°ë§Œ ê°€ëŠ¥, commitê¹Œì§€ í•´ì•¼ ì™„ì „ ì €ì¥
 select mdate,mdate+30 from mem2;
 
 select * from employees;
@@ -116,32 +116,32 @@ mdate2 timestamp
 );
 
 --char, varchar2
---char: °íÁ¤ ¹®ÀÚ
+--char: ê³ ì • ë¬¸ì
 insert into mem3 (tel) values ('11112222');
 insert into mem3 (tel) values ('22223333');
 insert into mem3 (tel) values ('111');
 insert into mem3 (tel) values ('123456789');
-insert into mem3 (tel) values ('È«');
+insert into mem3 (tel) values ('í™');
 
---varchar2: °¡º¯ ¹®ÀÚ
+--varchar2: ê°€ë³€ ë¬¸ì
 insert into mem3 (name) values ('11112222');
-insert into mem3 (name) values ('È«±æµ¿'); --ÇÑ±Û:: 3Å©±â
-insert into mem3 (name) values ('½Å»çÀÓ´ç'); --12 ÀÚ¸® ÇÊ¿ä
+insert into mem3 (name) values ('í™ê¸¸ë™'); --í•œê¸€:: 3í¬ê¸°
+insert into mem3 (name) values ('ì‹ ì‚¬ì„ë‹¹'); --12 ìë¦¬ í•„ìš”
 INSERT INTO MEM3 (NAME) VALUES ('AAA');
 insert into mem3 (name) values ('aaa');
 
 commit;
 
--- select, from 2°³ÀÇ Å°¿öµå·Î ±¸¼º µÊ
--- * ¸ğµç ÄÃ·³À» Ãâ·Â
--- sql±¸¹®: ´ë¼Ò¹®ÀÚ ±¸ºĞX, µ¥ÀÌÅÍ´Â ´ë¼Ò¹®ÀÚ ±¸ºĞ.
+-- select, from 2ê°œì˜ í‚¤ì›Œë“œë¡œ êµ¬ì„± ë¨
+-- * ëª¨ë“  ì»¬ëŸ¼ì„ ì¶œë ¥
+-- sqlêµ¬ë¬¸: ëŒ€ì†Œë¬¸ì êµ¬ë¶„X, ë°ì´í„°ëŠ” ëŒ€ì†Œë¬¸ì êµ¬ë¶„.
 select * from mem3 where name = 'aaa';
 select * from mem3 where name = 'AAA';
 select name from mem3 where lower(name) = 'aaa';
 
 select emp_name, department_id from employees;
 
---distinct: Áßº¹ Á¦¿Ü
+--distinct: ì¤‘ë³µ ì œì™¸
 select distinct department_id from employees;
 
 select * from departments;
@@ -157,10 +157,10 @@ select * from mem3;
 select no, mdate2, tel, name, mdate from mem3;
 
 select * from employees;
---Q. »ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Ş¿©, ÀÔ»çÀÏÀÚ
+--Q. ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬, ì…ì‚¬ì¼ì
 select employee_id, emp_name, salary, hire_date from employees;
 
---desc: Å¸ÀÔ È®ÀÎ
+--desc: íƒ€ì… í™•ì¸
 desc employees;
 
 select * from stu_score;
@@ -178,11 +178,11 @@ rank number
 );
 
 insert into stu_score values (
-1,'È«±æµ¿',100,100,100,300,100,1
+1,'í™ê¸¸ë™',100,100,100,300,100,1
 );
 
 insert into stu_score values (
-5,'±è±¸',100,100,100,300,100,1
+5,'ê¹€êµ¬',100,100,100,300,100,1
 );
 
 commit;

@@ -5,7 +5,7 @@ order by name asc;
 
 --drop table students;
 
---Å×ÀÌºí ÄÃ·³ Ãß°¡
+--í…Œì´ë¸” ì»¬ëŸ¼ ì¶”ê°€
 alter table students add rank number(3);
 
 select * from students;
@@ -32,29 +32,29 @@ from students) b where a.no = b.no);
 select total, rank from students
 order by asc;
 
---1. update ±¸¹®
+--1. update êµ¬ë¬¸
 update students a set rank = (rank);
 
---2.no, rank() ±¸¹®
+--2.no, rank() êµ¬ë¬¸
 (select no, rank() over (order by total desc) ranks from students) b;
 
---3. update±¸¹®°ú rank()±¸¹®À» no ÄÃ·³À¸·Î ºñ±³, rankÄÃ·³ °Ë»ö
+--3. updateêµ¬ë¬¸ê³¼ rank()êµ¬ë¬¸ì„ no ì»¬ëŸ¼ìœ¼ë¡œ ë¹„êµ, rankì»¬ëŸ¼ ê²€ìƒ‰
 update students a set rank = (
 select ranks from (students) b
 where a.no = b.no
 );
 
---4. students Å×ÀÌºí¿¡¼­ ranks°¡ µé¾î°¡ ÀÖ´Â Å×ÀÌºíÀ» ³Ö¾îÁÜ.
+--4. students í…Œì´ë¸”ì—ì„œ ranksê°€ ë“¤ì–´ê°€ ìˆëŠ” í…Œì´ë¸”ì„ ë„£ì–´ì¤Œ.
 update students a set rank = (
 select ranks from (select no, rank() over (order by total desc) ranks from students) b
 where a.no=b.no
 );
 
---¿ª¼øÁ¤·Ä
+--ì—­ìˆœì •ë ¬
 select no, total, rank from students
 order by total desc;
 
---¼øÂ÷Á¤·Ä
+--ìˆœì°¨ì •ë ¬
 select no, total, rank from students
 order by no asc;
 
@@ -70,24 +70,24 @@ order by hire_date;
 select max(kor) - min (kor) from students;
 select max(kor),max(eng),max(math) from students;
 
---Q. ÀÔ»çÀÏ·Î ¿À¸§Â÷¼ø
+--Q. ì…ì‚¬ì¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ
 select employee_id, emp_name, job_id, hire_date, salary from employees
 order by hire_date desc;
 
---Q. ±Ş¿© Àû°Ô ¹Ş´Â »ç¶÷¼ø Ãâ·Â, °°À¸¸é »ç¿ø¸íÀ¸·Î ¿ª¼øÁ¤·Ä
+--Q. ê¸‰ì—¬ ì ê²Œ ë°›ëŠ” ì‚¬ëŒìˆœ ì¶œë ¥, ê°™ìœ¼ë©´ ì‚¬ì›ëª…ìœ¼ë¡œ ì—­ìˆœì •ë ¬
 select employee_id, emp_name, job_id, hire_date, salary from employees
 order by salary, emp_name desc;
 
 select * from employees;
 
---¼ıÀÚÇÔ¼ö
+--ìˆ«ìí•¨ìˆ˜
 --abs
 select -10, abs(-10) from dual;
 
---floor: ¹ö¸², ÀÚ¸´¼ö ÁöÁ¤ ºÒ°¡
+--floor: ë²„ë¦¼, ìë¦¿ìˆ˜ ì§€ì • ë¶ˆê°€
 select 34.789, floor(34.789) as f, round(34.789) as r from dual;
 
---round(´ë»ó, ÀÚ¸´¼ö) ex) round (34.178,2) 2ÀÚ¸®±îÁö Ç¥½Ã
+--round(ëŒ€ìƒ, ìë¦¿ìˆ˜) ex) round (34.178,2) 2ìë¦¬ê¹Œì§€ í‘œì‹œ
 select 34.178, round(34.178), round(34.178,2) from dual;
 
 select avg from students;
@@ -95,58 +95,58 @@ select round(avg, 2) avg from students;
 
 select 34.5678, round (34.5678,-1) from dual;
 
---trunc: ÁöÁ¤ÇÑ ÀÚ¸´¼ö ÀÌÇÏ ¹ö¸². 
+--trunc: ì§€ì •í•œ ìë¦¿ìˆ˜ ì´í•˜ ë²„ë¦¼. 
 select trunc(34.5678,2) from dual;
 select trunc(34.5678,-1) from dual;
 select trunc(34.5678) from dual;
 
---ceil: ¿Ã¸², ÀÚ¸´¼ö ÁöÁ¤ ºÒ°¡
+--ceil: ì˜¬ë¦¼, ìë¦¿ìˆ˜ ì§€ì • ë¶ˆê°€
 select ceil(34.123) from dual;
 
---Q. ±¹¾î Á¡¼ö ÀÏ´ÜÀ§ Àı»çÇØ¼­ Ãâ·Â
+--Q. êµ­ì–´ ì ìˆ˜ ì¼ë‹¨ìœ„ ì ˆì‚¬í•´ì„œ ì¶œë ¥
 select trunc(kor,-1) kor from students
 order by kor;
 
---Q. ±¹¾î, ¿µ¾î, ¼öÇĞ Á¡¼ö¸¦ ÀÏ´ÜÀ§ Àı»çÇØ¼­ ÇÕÀ» Ãâ·ÂÇÏ½Ã¿À.
+--Q. êµ­ì–´, ì˜ì–´, ìˆ˜í•™ ì ìˆ˜ë¥¼ ì¼ë‹¨ìœ„ ì ˆì‚¬í•´ì„œ í•©ì„ ì¶œë ¥í•˜ì‹œì˜¤.
 select trunc(kor,-1) kor, trunc(eng,-1) eng, trunc(math,-1) math, 
 (trunc(kor,-1)+trunc(eng,-1)+trunc(math,-1)) total 
 from students;
 
---mod ³ª¸ÓÁö
+--mod ë‚˜ë¨¸ì§€
 select round(100/7,2) from dual;
 select mod(10,7) from dual;
 
---³ª´©±â
+--ë‚˜ëˆ„ê¸°
 select 10/7 from dual;
 
---Q. »ç¿ø¹øÈ£°¡ Â¦¼öÀÎ °ÍÀ» Ãâ·ÂÇÏ½Ã¿À.
+--Q. ì‚¬ì›ë²ˆí˜¸ê°€ ì§ìˆ˜ì¸ ê²ƒì„ ì¶œë ¥í•˜ì‹œì˜¤.
 select employee_id from employees
 where mod(employee_id,2)=0;
 
---¸ò
+--ëª«
 select floor(10/7) from dual;
---³ª¸ÓÁö
+--ë‚˜ë¨¸ì§€
 select mod(10,7) from dual;
 
---Q. ÇĞ¹øÀÌ 3ÀÇ ¹è¼öÀÎ ÇĞ»ı¸¸ Ãâ·Â
+--Q. í•™ë²ˆì´ 3ì˜ ë°°ìˆ˜ì¸ í•™ìƒë§Œ ì¶œë ¥
 select no,name from students
 where mod(no,3)=0;
 
 -------------------------------------------------------------------------------
 
---½ÃÄö½º
+--ì‹œí€€ìŠ¤
 create sequence seq_no
-increment by 1  -- 1¾¿ Áõ°¡
-start with 1    -- 1ºÎÅÍ ½ÃÀÛ
-minvalue 1      -- ÃÖ¼Ò°ª 1
-maxvalue 9999   -- ÃÖ´ë°ª 9999
-nocycle         -- ¼øÈ¯X
-nocache         -- Ä³½Ã »ç¿ëX
+increment by 1  -- 1ì”© ì¦ê°€
+start with 1    -- 1ë¶€í„° ì‹œì‘
+minvalue 1      -- ìµœì†Œê°’ 1
+maxvalue 9999   -- ìµœëŒ€ê°’ 9999
+nocycle         -- ìˆœí™˜X
+nocache         -- ìºì‹œ ì‚¬ìš©X
 ;
--- nextval: ½ÃÄö½º ¹øÈ£ 1¾¿ Áõ°¡
+-- nextval: ì‹œí€€ìŠ¤ ë²ˆí˜¸ 1ì”© ì¦ê°€
 select seq_no.nextval from dual;
 
--- currval: ½ÃÄö½º ¹øÈ£ È®ÀÎ
+-- currval: ì‹œí€€ìŠ¤ ë²ˆí˜¸ í™•ì¸
 select seq_no.currval from dual;
 
 --drop table member;
@@ -173,7 +173,7 @@ nocache
 select seq_mno.nextval from dual;
 
 insert into member values (
-seq_mno.nextval,'eee','1111','±è±¸','010-5555-5555'
+seq_mno.nextval,'eee','1111','ê¹€êµ¬','010-5555-5555'
 );
 
 select * from member;
@@ -181,11 +181,11 @@ select * from member;
 select sysdate from dual;
 select to_char(sysdate,'yy') from dual;
 
--- '0000' ÀÚ¸´¼ö
+-- '0000' ìë¦¿ìˆ˜
 select 's'||to_char(seq_mno.nextval,'0000') from dual;
 
---Q. ÇÑ±¹´ëÇĞ±³ ko20240001
--- ½ÃÄö½º seq_kono 1 - 9999
+--Q. í•œêµ­ëŒ€í•™êµ ko20240001
+-- ì‹œí€€ìŠ¤ seq_kono 1 - 9999
 create sequence seq_kono
 increment by 1
 start with 1
@@ -195,10 +195,10 @@ nocycle
 nocache
 ;
 
--- trim(): °ø¹éÁ¦°Å
+-- trim(): ê³µë°±ì œê±°
 select 'ko'||to_char(sysdate,'yyyy')||trim(to_char(seq_kono.nextval,'0000'))as stuno from dual;
 
--- °Ô½ÃÆÇ
+-- ê²Œì‹œíŒ
 create table board (
 bno number(5) primary key,
 btitle varchar2(1000),
@@ -208,7 +208,7 @@ bdate date,
 bhit number(10)
 );
 
---Q. ½ÃÄö½º seq_deptno ½ÃÀÛ 1001, Áõ°¨ 10, ÃÖ¼Ò°ª 1, ÃÖ´ë°ª 99999, 5¹ø ½ÇÇà
+--Q. ì‹œí€€ìŠ¤ seq_deptno ì‹œì‘ 1001, ì¦ê° 10, ìµœì†Œê°’ 1, ìµœëŒ€ê°’ 99999, 5ë²ˆ ì‹¤í–‰
 create sequence seq_deptno
 increment by 10
 start with 1001
@@ -239,49 +239,49 @@ alter sequence emp_seq
 increment by 1001;
 
 insert into emp01 values(
-emp_seq.nextval, 'ÀÌ¼ø½Å', sysdate
+emp_seq.nextval, 'ì´ìˆœì‹ ', sysdate
 );
 
 select *from emp01;
 
 commit;
 
---Q. ÇöÀç±îÁö ÀÔ»çÇÑ ÀÏ¼ö¸¦ ÇÔ²² Ãâ·Â (¿Ã¸²)
-select employee_id, emp_name, job_id, hire_date, ceil(sysdate - hire_date)||'ÀÏ' 
+--Q. í˜„ì¬ê¹Œì§€ ì…ì‚¬í•œ ì¼ìˆ˜ë¥¼ í•¨ê»˜ ì¶œë ¥ (ì˜¬ë¦¼)
+select employee_id, emp_name, job_id, hire_date, ceil(sysdate - hire_date)||'ì¼' 
 from employees
 order by hire_date desc;
 
---Q. »ç¿ø¹øÈ£, »ç¿ø¸í, Á÷±Ş, ÀÔ»çÀÏ ¿À¸§Â÷¼øÀ¸·Î Á¤·Ä
+--Q. ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ëª…, ì§ê¸‰, ì…ì‚¬ì¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
 select employee_id, emp_name, job_id, hire_date from employees
 order by hire_date desc;
 
 select emp_name from employees;
 
---Q. Á÷±Ş°ú »ç¹øÀ» ÇÕÃÄ¼­ Ãâ·Â
+--Q. ì§ê¸‰ê³¼ ì‚¬ë²ˆì„ í•©ì³ì„œ ì¶œë ¥
 select job_id||employee_id from employees;
 
---substr: ¹®ÀÚ¿­ ÀÚ¸£±â ÇÔ¼ö, substr(´ë»ó, ½ÃÀÛ À§Ä¡, °³¼ö)
+--substr: ë¬¸ìì—´ ìë¥´ê¸° í•¨ìˆ˜, substr(ëŒ€ìƒ, ì‹œì‘ ìœ„ì¹˜, ê°œìˆ˜)
 select substr(job_id,0,2) from employees;
 select emp_name, substr(emp_name,1,3) from employees;
 select substr('abcde',2,3) from dual;
 
---Q. job_id ¾Õ 2°³ ¹®ÀÚ¿Í »ç¹ø 5ÀÚ¸® ex) SH00198
+--Q. job_id ì• 2ê°œ ë¬¸ìì™€ ì‚¬ë²ˆ 5ìë¦¬ ex) SH00198
 select substr(job_id,0,2)||trim(to_char(employee_id,'00000')) from employees;
 
--- ³¯Â¥ ÇÔ¼ö
+-- ë‚ ì§œ í•¨ìˆ˜
 select sysdate from dual;
 
 select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') from dual;
 
--- µÎ ³¯Â¥ »çÀÌÀÇ °³¿ù¼ö È®ÀÎ
-select MONTHS_BETWEEN(SYSDATE,hire_date) °³¿ù, sysdate - hire_date ÀÏ from employees;
+-- ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ê°œì›”ìˆ˜ í™•ì¸
+select MONTHS_BETWEEN(SYSDATE,hire_date) ê°œì›”, sysdate - hire_date ì¼ from employees;
 
--- °³¿ù ¼ö Ãß°¡
+-- ê°œì›” ìˆ˜ ì¶”ê°€
 select sysdate, add_months(sysdate,2) from dual;
 
--- ÀÔ·ÂÇÑ ±âÁØÀ¸·Î ´ÙÀ½ ¿äÀÏ ¾Ë·ÁÁÜ.
-select next_day(sysdate,'¿ù¿äÀÏ') from dual;
+-- ì…ë ¥í•œ ê¸°ì¤€ìœ¼ë¡œ ë‹¤ìŒ ìš”ì¼ ì•Œë ¤ì¤Œ.
+select next_day(sysdate,'ì›”ìš”ì¼') from dual;
 
--- ÀÔ·ÂÇÑ ±âÁØÀ¸·Î ´ŞÀÇ ¸¶Áö¸· ÀÏÀ» ¾Ë·ÁÁÜ.
+-- ì…ë ¥í•œ ê¸°ì¤€ìœ¼ë¡œ ë‹¬ì˜ ë§ˆì§€ë§‰ ì¼ì„ ì•Œë ¤ì¤Œ.
 select last_day(sysdate) from dual;
 select last_day('2024-02-01') from dual;
