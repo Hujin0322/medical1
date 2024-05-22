@@ -61,7 +61,7 @@ matplotlib.rcParams['font.family'] = 'Malgun Gothic' # 한글 설정
 matplotlib.rcParams['font.size'] = 10 #글자 크기
 matplotlib.rcParams['axes.unicode_minus'] = False
 
-# <머신러닝 구현>
+# <머신러닝 구현>-----------------------------------------------------------------------
 # 1. 데이터 전처리 - Nan, 0, 단위 처리, train_set, test_set 분리
 # 모든 데이터 입력은 숫자여야 함.
 # 데이터 1개: 리스트 타입
@@ -69,16 +69,38 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 train_input, test_input, train_target, test_target = train_test_split('데이터')
 
 # 2. 데이터 학습
-# 1). svm
+clf = svm.SVC() # 사용할 함수 
+clf.fit(train_input,train_target)
+
+# 3. 데이터 예측
+predict = clf.predict(test_input)
+
+# 4. 예측값 구하기 (오차 범위)
+score = clf.score(test_input,test_target)
+
+# --------------------------------------------------------------------------------------------------------
+# numpy - 평균, 표준편차
+mean = np.mean(train_input, axis=0)
+std = np.std(train_input,axis=0)
+
+# 표준 점수 = (훈련 데이터 - 평균) / 표준편차
+train_scaled = (train_input - mean) / std
+train_scaled = (test_input - mean) / std
+# --------------------------------------------------------------------------------------------------------
+
+# 1). svm ---------------------------------------------------------------------------------------------
+from sklearn import svm,metrics
 clf = svm.SVC() # svm 라이브러리 사용
 clf.fit(train_input,train_target) # fit 훈련 시키는 과정(데이터, 결과값) --> list 타입
 
-# 2). KNN 알고리즘 
+# 2). KNN 알고리즘 ---------------------------------------------------------------------------------------------
 # - 최근접 이웃 분류
-knr = KNeighborsRegressor() # 분류
+from sklearn.neighbors import KNeighborsClassifier # 분류
+knr = KNeighborsClassifier() # 분류
 knr.fit(train_input, train_target)
 
 # - 최근접 이웃 회귀: 근접 이웃의 평균
+from sklearn.neighbors import KNeighborsRegressor   # 회귀 - 예측
 knr = KNeighborsRegressor() # 회귀 - 예측
 knr.fit(train_input, train_target)
 
@@ -86,12 +108,14 @@ knr.fit(train_input, train_target)
 # 과대 적합, 과소 적합 (train score < test score) --> 수동 테스트 필요
 knr.n_neighbors = n # 기본 5에서 n개로 변경
 
-# 3). RandomForestClassifier - 예측, 분류
+# 3). RandomForestClassifier - 예측, 분류 ---------------------------------------------------------------------------------------------
+from sklearn.ensemble import RandomForestClassifier #예측, 분류
 rfc = RandomForestClassifier()
 rfc.fit(train_input,train_target)
 
-# 4). LinearRegression - 선형 회귀, 예측
+# 4). LinearRegression - 선형 회귀, 예측 ---------------------------------------------------------------------------------------------
 # KNN 단점 보완, 기울기 이용 -> 데이터 확장 가능, 곡선화 (2차원 방정식) -> 0에서 -가 되는 경우 보완 가능.
+from sklearn.linear_model import LinearRegression # 선형 회귀
 lr = LinearRegression()
 lr.fit(train_input,train_target)
 
@@ -108,18 +132,3 @@ from sklearn.preprocessing import PolynomialFeatures
 plt.scatter(train_input,train_target)
 x = np.arange(15,50)
 plt.plot(x, (1.014*x)**2+-21.55*x+116.05) # 기울기*x**2 + 기울기 * x + y절편
-
-# 3. 데이터 예측
-predict = clf.predict(test_input)
-
-# 4. 예측값 구하기 (오차 범위)
-score = clf.score(test_input,test_target)
-
-# --------------------------------------------------------------------------------------------------------
-# numpy - 평균, 표준편차
-mean = np.mean(train_input, axis=0)
-std = np.std(train_input,axis=0)
-
-# 표준 점수 = (훈련 데이터 - 평균) / 표준편차
-train_scaled = (train_input - mean) / std
-train_scaled = (test_input - mean) / std
